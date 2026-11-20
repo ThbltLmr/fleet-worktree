@@ -25,7 +25,7 @@ export default class FleetWorktree extends View {
       this.error = "";
       cx.notify();
     });
-    this.input.on("submit", (_e, cx) => this.go(cx));
+    this.input.on("submit", (_e, cx) => this.create(cx));
     this.handle = cx.focus_handle();
     this.handle.focus();
     if (!checking()) cx.timer.after(50, () => this.input.focus());
@@ -35,7 +35,7 @@ export default class FleetWorktree extends View {
     closeOverlay(props()?.overlay);
   }
 
-  go(cx) {
+  create(cx) {
     const branch = this.text.trim();
     if (this.busy || !this.folder) return;
     if (!branch) {
@@ -85,7 +85,7 @@ export default class FleetWorktree extends View {
           .text_color(t.muted)
           .child(
             this.folder
-              ? `fleet worktree create from ${this.folder}${this.where ? ` (${this.where})` : ""}. A branch that exists is checked out; local files are copied and dependencies installed.`
+              ? `fleet worktree create from ${this.folder}${this.where ? ` (${this.where})` : ""}. A branch that exists is checked out; worktree local files are copied and dependencies installed.`
               : "No folder to start from.",
           ),
       )
